@@ -16,6 +16,11 @@ import {
 const COLORS = {
   I: '#70d6ff', J: '#5b8cff', L: '#ff9f4a', O: '#f5c951', S: '#67d17b', T: '#d982e4', Z: '#f06a6a'
 };
+const DIFFICULTIES = {
+  easy: { initialDelay: 1050, levelStep: 60, minimumDelay: 220 },
+  standard: { initialDelay: 900, levelStep: 75, minimumDelay: 110 },
+  hard: { initialDelay: 650, levelStep: 90, minimumDelay: 70 }
+};
 const CELL_SIZE = 30;
 const gameCanvas = document.querySelector('#game-canvas');
 const nextCanvas = document.querySelector('#next-canvas');
@@ -27,9 +32,11 @@ const linesOutput = document.querySelector('#lines');
 const statusMessage = document.querySelector('#status-message');
 const startButton = document.querySelector('#start-button');
 const pauseButton = document.querySelector('#pause-button');
+const difficultyInputs = document.querySelectorAll('input[name="difficulty"]');
 
 let state = createInitialState();
 let timerId = null;
+let difficulty = 'standard';
 
 function createInitialState() {
   return { board: createBoard(), active: null, next: null, score: 0, lines: 0, level: 1, status: 'ready', bag: [] };
@@ -45,7 +52,8 @@ function takePiece() {
 }
 
 function fallDelay() {
-  return Math.max(110, 900 - (state.level - 1) * 75);
+  const settings = DIFFICULTIES[difficulty];
+  return Math.max(settings.minimumDelay, settings.initialDelay - (state.level - 1) * settings.levelStep);
 }
 
 function setStatus(message, visible = true) {
@@ -58,8 +66,8 @@ function updateHud() {
   levelOutput.textContent = String(state.level);
   linesOutput.textContent = String(state.lines);
   pauseButton.disabled = state.status === 'ready' || state.status === 'over';
-  pauseButton.textContent = state.status === 'paused' ? '继续' : '暂停';
-  startButton.textContent = state.status === 'playing' ? '重新开始' : state.status === 'over' ? '再玩一次' : '开始游戏';
+  pauseButton.textContent = state.status === 'paused' ? 'Resume' : 'Pause';
+  startButton.textContent = state.status === 'playing' ? 'Restart game' : state.status === 'over' ? 'Play again' : 'Start game';
 }
 
 function drawCell(context, x, y, color, size = CELL_SIZE) {
@@ -125,7 +133,7 @@ function spawnPiece() {
   if (collides(state.board, state.active)) {
     state.status = 'over';
     stopTimer();
-    setStatus('游戏结束', true);
+    setStatus('Game over', true);
   }
 }
 
@@ -183,7 +191,7 @@ function togglePause() {
   if (state.status === 'playing') {
     state.status = 'paused';
     stopTimer();
-    setStatus('已暂停', true);
+    setStatus('Paused', true);
   } else if (state.status === 'paused') {
     state.status = 'playing';
     setStatus('', false);
@@ -204,6 +212,13 @@ function handleAction(action) {
 
 startButton.addEventListener('click', startGame);
 pauseButton.addEventListener('click', togglePause);
+difficultyInputs.forEach((input) => {
+  input.addEventListener('change', () => {
+    if (!input.checked) return;
+    difficulty = input.value;
+    if (state.status === 'playing') scheduleDrop();
+  });
+});
 document.querySelectorAll('[data-action]').forEach((button) => {
   button.addEventListener('click', () => handleAction(button.dataset.action));
 });
@@ -215,5 +230,5 @@ document.addEventListener('keydown', (event) => {
   handleAction(action);
 });
 
-setStatus('按开始进入游戏', true);
+setStatus('Press start to play', true);
 render();

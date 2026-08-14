@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
       <section class="game-layout" aria-label="Tetris game">
         <div class="board-wrap">
           <canvas id="game-canvas" width="300" height="600" aria-label="Tetris game board"></canvas>
-          <p id="status-message" class="status-message" aria-live="polite">按开始进入游戏</p>
+          <p id="status-message" class="status-message" aria-live="polite">Press start to play</p>
         </div>
 
         <aside class="side-panel" aria-label="Game information">
@@ -32,19 +32,28 @@
             <div><dt>LINES</dt><dd id="lines">0</dd></div>
           </dl>
 
+          <fieldset class="difficulty-picker">
+            <legend>DIFFICULTY</legend>
+            <div class="difficulty-options" role="radiogroup" aria-label="Game difficulty">
+              <label><input type="radio" name="difficulty" value="easy"> Easy</label>
+              <label><input type="radio" name="difficulty" value="standard" checked> Standard</label>
+              <label><input type="radio" name="difficulty" value="hard"> Hard</label>
+            </div>
+          </fieldset>
+
           <div class="commands">
-            <button id="start-button" class="primary-button" type="button">开始游戏</button>
-            <button id="pause-button" class="secondary-button" type="button" disabled>暂停</button>
+            <button id="start-button" class="primary-button" type="button">Start game</button>
+            <button id="pause-button" class="secondary-button" type="button" disabled>Pause</button>
           </div>
         </aside>
       </section>
 
       <nav class="touch-controls" aria-label="Game controls">
-        <button type="button" data-action="left" aria-label="向左移动" title="向左移动">&#8592;</button>
-        <button type="button" data-action="rotate" aria-label="旋转" title="旋转">&#8635;</button>
-        <button type="button" data-action="right" aria-label="向右移动" title="向右移动">&#8594;</button>
-        <button type="button" data-action="down" aria-label="向下移动" title="向下移动">&#8595;</button>
-        <button type="button" data-action="drop" aria-label="快速下落" title="快速下落">&#8659;</button>
+        <button type="button" data-action="left" aria-label="Move left" title="Move left">&#8592;</button>
+        <button type="button" data-action="rotate" aria-label="Rotate piece" title="Rotate piece">&#8635;</button>
+        <button type="button" data-action="right" aria-label="Move right" title="Move right">&#8594;</button>
+        <button type="button" data-action="down" aria-label="Move down" title="Move down">&#8595;</button>
+        <button type="button" data-action="drop" aria-label="Hard drop" title="Hard drop">&#8659;</button>
       </nav>
 
       <footer class="keyboard-hint">Arrow keys to move &middot; Up to rotate &middot; Space to drop &middot; P to pause</footer>

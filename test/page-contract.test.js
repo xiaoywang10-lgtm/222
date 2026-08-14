@@ -9,4 +9,7 @@ test('the page exposes every game controller target', async () => {
   }
   assert.match(html, /data-action=["']rotate["']/);
   assert.match(html, /data-action=["']drop["']/);
+  for (const difficulty of ['easy', 'standard', 'hard']) {
+    assert.match(html, new RegExp(`name=["']difficulty["'][^>]*value=["']${difficulty}["']`));
+  }
 });
