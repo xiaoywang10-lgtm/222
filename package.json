@@ -1,0 +1,8 @@
+{
+  "name": "classic-tetris",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

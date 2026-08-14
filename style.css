@@ -1,0 +1,184 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #161b1e;
+  color: #f6f7f2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #161b1e;
+}
+
+button, canvas { touch-action: manipulation; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid #70d6ff;
+  outline-offset: 3px;
+}
+
+.game-shell {
+  width: min(100% - 32px, 840px);
+  margin: 0 auto;
+  padding: 28px 0 32px;
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid #39434a;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+}
+
+.eyebrow, .panel-label, .keyboard-hint {
+  margin: 0;
+  color: #aab8bd;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0;
+  color: #f5c951;
+  font-size: 30px;
+  letter-spacing: 0;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(190px, 240px);
+  gap: 28px;
+  justify-content: center;
+}
+
+.board-wrap {
+  position: relative;
+  width: 300px;
+  height: 600px;
+  border: 2px solid #53626a;
+  background: #0c1012;
+}
+
+#game-canvas {
+  display: block;
+  width: 300px;
+  height: 600px;
+  max-width: 100%;
+  background: #0c1012;
+}
+
+.status-message {
+  position: absolute;
+  inset: auto 16px 18px;
+  margin: 0;
+  padding: 8px 10px;
+  background: #d8eff8;
+  color: #172126;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.side-panel {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.next-piece, .stats {
+  border-top: 1px solid #53626a;
+  border-bottom: 1px solid #53626a;
+  padding: 14px 0;
+}
+
+#next-canvas {
+  display: block;
+  margin-top: 8px;
+  background: #0c1012;
+  border: 1px solid #39434a;
+}
+
+.stats {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.stats div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #2b3439;
+}
+
+.stats div:last-child { border-bottom: 0; }
+
+dt, dd { margin: 0; }
+
+dt { color: #aab8bd; font-size: 12px; font-weight: 700; }
+dd { color: #f6f7f2; font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.commands { display: grid; gap: 10px; }
+
+.primary-button, .secondary-button {
+  min-height: 44px;
+  border: 1px solid #70d6ff;
+  border-radius: 4px;
+  padding: 0 14px;
+  font-weight: 800;
+}
+
+.primary-button { background: #70d6ff; color: #102127; }
+.primary-button:hover { background: #b5ebff; }
+.secondary-button { background: transparent; color: #e7f6fc; }
+.secondary-button:hover:not(:disabled) { background: #26343a; }
+.secondary-button:disabled { border-color: #48545a; color: #718086; cursor: not-allowed; }
+
+.touch-controls {
+  display: grid;
+  grid-template-columns: repeat(5, 48px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.touch-controls button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #53626a;
+  border-radius: 4px;
+  background: #222b30;
+  color: #f6f7f2;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.touch-controls button:hover { background: #344249; }
+
+.keyboard-hint {
+  margin-top: 18px;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .game-shell { width: min(100% - 24px, 360px); padding-top: 18px; }
+  .masthead { margin-bottom: 18px; }
+  h1 { font-size: 26px; }
+  .game-layout { grid-template-columns: 1fr; gap: 18px; }
+  .board-wrap, #game-canvas { width: 100%; height: auto; aspect-ratio: 1 / 2; }
+  .side-panel { grid-template-columns: 120px 1fr; gap: 16px; }
+  .commands { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; }
+  .keyboard-hint { line-height: 1.5; }
+}

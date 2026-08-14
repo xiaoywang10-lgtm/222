@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#161b1e">
+    <title>Tetris</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="masthead">
+        <p class="eyebrow">ARCADE / 01</p>
+        <h1>TETRIS</h1>
+      </header>
+
+      <section class="game-layout" aria-label="Tetris game">
+        <div class="board-wrap">
+          <canvas id="game-canvas" width="300" height="600" aria-label="Tetris game board"></canvas>
+          <p id="status-message" class="status-message" aria-live="polite">按开始进入游戏</p>
+        </div>
+
+        <aside class="side-panel" aria-label="Game information">
+          <section class="next-piece" aria-label="Next piece">
+            <p class="panel-label">NEXT</p>
+            <canvas id="next-canvas" width="120" height="100" aria-label="Next Tetris piece"></canvas>
+          </section>
+
+          <dl class="stats" aria-label="Game score">
+            <div><dt>SCORE</dt><dd id="score">0</dd></div>
+            <div><dt>LEVEL</dt><dd id="level">1</dd></div>
+            <div><dt>LINES</dt><dd id="lines">0</dd></div>
+          </dl>
+
+          <div class="commands">
+            <button id="start-button" class="primary-button" type="button">开始游戏</button>
+            <button id="pause-button" class="secondary-button" type="button" disabled>暂停</button>
+          </div>
+        </aside>
+      </section>
+
+      <nav class="touch-controls" aria-label="Game controls">
+        <button type="button" data-action="left" aria-label="向左移动" title="向左移动">&#8592;</button>
+        <button type="button" data-action="rotate" aria-label="旋转" title="旋转">&#8635;</button>
+        <button type="button" data-action="right" aria-label="向右移动" title="向右移动">&#8594;</button>
+        <button type="button" data-action="down" aria-label="向下移动" title="向下移动">&#8595;</button>
+        <button type="button" data-action="drop" aria-label="快速下落" title="快速下落">&#8659;</button>
+      </nav>
+
+      <footer class="keyboard-hint">Arrow keys to move &middot; Up to rotate &middot; Space to drop &middot; P to pause</footer>
+    </main>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
